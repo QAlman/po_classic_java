@@ -1,0 +1,11 @@
+*.idea*
+*target*
+*.iml*
+target/allure-results
+build
+*.log*
+allure-results
+screenshots
+video
+report
+repository
