@@ -145,8 +145,8 @@ public class LoginPageOperations {
         enterRegistrationCode("000000");
         registrationError();
         try {
-            loginPage.iHaventLentasCard().click();
-            log.info("Tap i haven`t lenta`s card");
+            loginPage.iHaventProjectLsCard().click();
+            log.info("Tap i haven`t ProjectL`s card");
         } catch (ElementNotFound e) {
             log.info("Screen with input card`s number not found");
         }
@@ -163,8 +163,8 @@ public class LoginPageOperations {
         loginPage.submitButton().click();
         log.info("Input validation code");
         enterRegistrationCode("000000");
-        log.info("Tap i haven`t lenta`s card");
-        loginPage.iHaventLentasCard().click();
+        log.info("Tap i haven`t ProjectL`s card");
+        loginPage.iHaventProjectLsCard().click();
         loginPage.continueWithOutEmailButton().click();
         submitUserData(user);
     }

@@ -30,7 +30,7 @@ public class PersonalCabinetPage extends BasePage {
     }
 
     public SelenideElement getUserName() {
-        lentaLogo().waitUntil(Condition.visible, Long.parseLong(getProperty("driver.wait.timeout"))).isDisplayed();
+        ProjectLLogo().waitUntil(Condition.visible, Long.parseLong(getProperty("driver.wait.timeout"))).isDisplayed();
         ((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('header__profile-menu--authorized')[0].style.display=\"unset\"");
         return $(byClassName("header__profile-name-text"));
     }
@@ -43,7 +43,7 @@ public class PersonalCabinetPage extends BasePage {
     public SelenideElement quitButton() {
         return $(byText("Выйти"));
     }
-    public SelenideElement lentaLogo() {return $(byClassName("header__logo")); }
+    public SelenideElement ProjectLLogo() {return $(byClassName("header__logo")); }
 
     public SelenideElement messageButton() {
         return $(byText("Сообщения"));

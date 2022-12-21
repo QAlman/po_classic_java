@@ -13,10 +13,10 @@ import web.objs.model.CartSkusPostModel;
 
 import java.util.List;
 
-public class EcomAPI extends BaseAPIClass {
+public class ProjectAPI extends BaseAPIClass {
 
-    @Step(value = "Получить статус активности Ecom в торговом центре")
-    public Response get_EcomStatsInTradeCenter(String uri) {
+    @Step(value = "Получить статус активности Project в торговом центре")
+    public Response get_ProjectStatsInTradeCenter(String uri) {
         return RestAssured.get(host + uri).andReturn();
     }
 
@@ -71,7 +71,7 @@ public class EcomAPI extends BaseAPIClass {
 
     @Step(value = "Разместить заказ")
     public Response get_createOrder(Cookies strings, String storeId) {
-        String url = host + "/api/v2/ecom/order/create";
+        String url = host + "/api/v2/Project/order/create";
 
         return RestAssured
                 .given()
@@ -110,7 +110,7 @@ public class EcomAPI extends BaseAPIClass {
 
     @Step(value = "Подтвердить заках")
     public Response post_ConfirmOrder(Cookies cookies, String timeslot, User user) {
-        String url = host + "/api/v2/ecom/order/confirm";
+        String url = host + "/api/v2/Project/order/confirm";
 
         JSONObject body = new JSONObject()
                 .put("name", user.getFirstName())
@@ -130,7 +130,7 @@ public class EcomAPI extends BaseAPIClass {
 
     @Step(value = "Добавить товары в корзину")
     public Response post_addGoodsToCart(Cookies cookies, String sku) {
-        String url = host + "/api/v2/ecom/cart";
+        String url = host + "/api/v2/Project/cart";
 
         JSONObject body = new JSONObject()
                 .put("skuCode", sku)

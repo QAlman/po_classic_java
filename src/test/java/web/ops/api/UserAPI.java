@@ -176,7 +176,7 @@ public class UserAPI {
     }
 
     @Step(value = "Удалить сообщения пользователя")
-    public Response delete_deleteComplaints(Cookies cookies, String complaintGuid) {
+    public Response delete_deletProjectplaints(Cookies cookies, String complaintGuid) {
 
         String url = host + "/api-data/complaint?complaintId=" + complaintGuid;
         JSONObject body = new JSONObject()

@@ -64,7 +64,7 @@ public class CookieHandler {
 
             return new Cookie.Builder(name, value)
                     .path("/")
-                    .domain("stage.lentatest.com")
+                    .domain("stage.ProjectLtest.com")
                     .isSecure(true)
                     .expiresOn(null)
                     .build();

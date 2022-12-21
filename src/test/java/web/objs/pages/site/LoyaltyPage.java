@@ -58,7 +58,7 @@ public class LoyaltyPage {
         return categories;
     }
 
-    public SelenideElement lentaLogo() {return $(byClassName("header__logo")); }
+    public SelenideElement ProjectLLogo() {return $(byClassName("header__logo")); }
 
     public SelenideElement loyaltyBanner() {return $(byClassName("loyalty-banner-block__picture")); }
     public SelenideElement headerEmailPopUpSent() {return $(byClassName("confirm-email__title--sent")); }

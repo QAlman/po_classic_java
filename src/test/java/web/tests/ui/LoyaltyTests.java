@@ -94,11 +94,11 @@ public class LoyaltyTests extends BaseUIClass {
         Assert.assertFalse(loyaltyPage.loyaltyInfoTabRight().isDisplayed());
 
         log.info("Check bonus game is not available. Redirect loyalty lk");
-        open("https://stage.lentatest.com/loyalty/loyalty-lk/bonus-game/");
+        open("https://stage.ProjectLtest.com/loyalty/loyalty-lk/bonus-game/");
         Assert.assertTrue(loyaltyPage.loyaltyBalanceTabLeft().isDisplayed());
 
         log.info("Check select categories is not available. Redirect loyalty lk");
-        open("https://stage.lentatest.com/loyalty/loyalty-lk/select-categiries/");
+        open("https://stage.ProjectLtest.com/loyalty/loyalty-lk/select-categiries/");
         Assert.assertTrue(loyaltyPage.loyaltyBalanceTabLeft().isDisplayed());
 
     }
@@ -235,7 +235,7 @@ public class LoyaltyTests extends BaseUIClass {
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        open("https://kibana.lentatest.com/s/lenta-app/app/kibana#/discover?_g=()"
+        open("https://kibana.ProjectLtest.com/s/ProjectL-app/app/kibana#/discover?_g=()"
                 + "&_a=(columns:!(_source),index:a721b7d0-e132-11e9-b382-db3cafc99065,interval:auto,query:(language:kuery,query:'\""
                 + defaultUser.getEmail() + "\"%20and%20\"Email%20Gateway%20stub\"'),sort:!('@timestamp',desc))");
 

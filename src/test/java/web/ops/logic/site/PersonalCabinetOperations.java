@@ -36,7 +36,7 @@ public class PersonalCabinetOperations {
     }
     public void deleteMessage(Cookies cookies, String complaintGuid) {
         log.info("delete message");
-        userAPI.delete_deleteComplaints(cookies, complaintGuid);
+        userAPI.delete_deletProjectplaints(cookies, complaintGuid);
 
     }
     public PersonalCabinetOperations deleteAllMessage(User user) {

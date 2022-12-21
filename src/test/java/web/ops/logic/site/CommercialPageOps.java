@@ -70,7 +70,7 @@ public class CommercialPageOps {
 
         public GeneralInformation raiseRequest() {
             log.info("Create commercial request");
-            commercialOfferPage.raiseCommercialOfferButton().click();
+            commercialOfferPage.raisProjectmercialOfferButton().click();
             return this;
         }
 
@@ -229,7 +229,7 @@ public class CommercialPageOps {
 
         public RepresenceInformation companyOffer(String value) {
             log.info("set company offer " + value);
-            commercialOfferPage.tradeComplex(value).click();
+            commercialOfferPage.tradProjectplex(value).click();
             return this;
         }
 

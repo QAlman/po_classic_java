@@ -20,7 +20,7 @@ public class CommercialOfferPage extends BasePage {
         super(driver);
     }
 
-    public SelenideElement raiseCommercialOfferButton() {
+    public SelenideElement raisProjectmercialOfferButton() {
         return $(byLinkText("Оставить коммерческое предложение"));
     }
 
@@ -159,7 +159,7 @@ public class CommercialOfferPage extends BasePage {
 
     }
 
-    public SelenideElement tradeComplex(String value) {
+    public SelenideElement tradProjectplex(String value) {
         return new RadioButton(getField("Способ поставки")).getRadioButtonElementByName(value);
         //return getRadioButtons(value, getField("Способ поставки"));
     }

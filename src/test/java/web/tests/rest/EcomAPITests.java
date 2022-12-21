@@ -16,7 +16,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import web.objs.model.CartSkuItemPostModel;
-import web.ops.api.EcomAPI;
+import web.ops.api.ProjectAPI;
 import web.ops.api.UserAPI;
 
 import java.util.ArrayList;
@@ -26,15 +26,15 @@ import java.util.List;
 
 import static web.ops.util.datautils.ConfigPropertiesUtil.getProperty;
 
-public class EcomAPITests extends BaseRestClass {
+public class ProjectAPITests extends BaseRestClass {
     private static String fieldsList;
 
     private static User user = new User();
     private final UserBuilder userBuilder = new UserBuilder();
     private static final UserAPI userAPI = new UserAPI();
-    private final String defaultStore = getProperty("ecom.defaultStore");
-    private final String defaultSKU = getProperty("ecom.defaultSKU");
-    private final EcomAPI ecomAPI = new EcomAPI();
+    private final String defaultStore = getProperty("Project.defaultStore");
+    private final String defaultSKU = getProperty("Project.defaultSKU");
+    private final ProjectAPI ProjectAPI = new ProjectAPI();
 
     @Before
     public void setUp() {
@@ -47,10 +47,10 @@ public class EcomAPITests extends BaseRestClass {
     @DisplayName("Проверить статус Екомм в ТК (Из магазина)")
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
-    public void get_EcommStatusInTC_fromStores_Test() {
-        fieldsList = "id, name, address, cityKey, cityName, type, lat, long, isDefaultStore, isEcomAvailable, is24hStore, hasPetShop, storeTimeZoneOffset";
+    public void get_ProjectmStatusInTC_fromStores_Test() {
+        fieldsList = "id, name, address, cityKey, cityName, type, lat, long, isDefaultStore, isProjectAvailable, is24hStore, hasPetShop, storeTimeZoneOffset";
 
-        Response response = ecomAPI.get_EcomStatsInTradeCenter("/api/v1/stores?storeId=0071");
+        Response response = ProjectAPI.get_ProjectStatsInTradeCenter("/api/v1/stores?storeId=0071");
         String body = response.getBody().asString();
 
         JsonElement parse = JsonParser.parseString(body);
@@ -58,41 +58,41 @@ public class EcomAPITests extends BaseRestClass {
 
         JsonArray responseBody = parse.getAsJsonArray();
 
-        String ecomStatus = null;
+        String ProjectStatus = null;
 
         for (int i = 0; i < responseBody.size(); i++) {
             JsonObject storeobject = responseBody.get(i).getAsJsonObject();
             String id = storeobject.get("id").getAsString();
             if (id.equals("0002")) {
-                ecomStatus = storeobject.get("isEcomAvailable").getAsString();
+                ProjectStatus = storeobject.get("isProjectAvailable").getAsString();
             }
         }
 
-        log.info("0002 Ecom status: " + ecomStatus);
+        log.info("0002 Project status: " + ProjectStatus);
 
-        Assert.assertEquals("0002 TK: Ecom should be enabled, current value: " + ecomStatus
-                , ecomStatus, "true");
+        Assert.assertEquals("0002 TK: Project should be enabled, current value: " + ProjectStatus
+                , ProjectStatus, "true");
 
         Assert.assertTrue(ìsRequiredFieldsInResponse(fieldsList, body));
     }
 
 
     @Test
-    @DisplayName("Проверить статус Ecomm в ТК (с главной)")
+    @DisplayName("Проверить статус Projectm в ТК (с главной)")
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
-    public void get_EcommStatusInTC_fromHome_Test() {
-        Response response = ecomAPI.get_EcomStatsInTradeCenter("/api/v1/stores/0012/home");
+    public void get_ProjectmStatusInTC_fromHome_Test() {
+        Response response = ProjectAPI.get_ProjectStatsInTradeCenter("/api/v1/stores/0012/home");
 
         JsonElement body = JsonParser.parseString(response.getBody().asString());
         log.trace(body);
 
-        String isEcomAvailable = body.getAsJsonObject().get("isEcomAvailable").getAsString();
+        String isProjectAvailable = body.getAsJsonObject().get("isProjectAvailable").getAsString();
 
-        log.info("0012 Ecom status: " + isEcomAvailable);
+        log.info("0012 Project status: " + isProjectAvailable);
 
-        Assert.assertEquals("0012 TK: Ecom should be enabled, current value: " + isEcomAvailable
-                , isEcomAvailable, "true");
+        Assert.assertEquals("0012 TK: Project should be enabled, current value: " + isProjectAvailable
+                , isProjectAvailable, "true");
 
     }
 
@@ -122,7 +122,7 @@ public class EcomAPITests extends BaseRestClass {
         Cookies cookies = userAPI.loginAndGetCookies(user);
         addGoodsToCart(cookies, defaultSKU);
 
-        Response res = ecomAPI.post_syncCart(cookies, skus, cart);
+        Response res = ProjectAPI.post_syncCart(cookies, skus, cart);
 
         String rawBody = res.getBody().asString();
         log.info(rawBody);
@@ -148,7 +148,7 @@ public class EcomAPITests extends BaseRestClass {
 
         Cookies cookies = userAPI.loginAndGetCookies(user);
 
-        Response response = ecomAPI.post_syncCart(cookies, skus, cart);
+        Response response = ProjectAPI.post_syncCart(cookies, skus, cart);
 
         log.trace(response.getBody());
         Assert.assertEquals(200, response.statusCode());
@@ -163,7 +163,7 @@ public class EcomAPITests extends BaseRestClass {
         fieldsList = "skus, promotions, cartStoreId, cart, promotions";
         Cookies cookies = userAPI.loginAndGetCookies(user);
 
-        Response response = ecomAPI.get_CartStatus(cookies, defaultStore);
+        Response response = ProjectAPI.get_CartStatus(cookies, defaultStore);
 
         log.trace(response.getBody().asString());
         log.trace(response.statusCode());
@@ -180,7 +180,7 @@ public class EcomAPITests extends BaseRestClass {
     public void post_ActualSKUInfo_unAuthorizedUser_Test() {
         fieldsList = "stampsPromotion, specification, groupName, groupDescription, properties, vendorCode, brandName, kindOfGoods, formatOfIssue, material, taste, fatContent, aroma, sound, customerSex, customerAge, package, color, amountInPackage, typeOfFeed, sportType, goodsType, sortOfGoods, productLine, numberOfPortions, cookingMethod, heatTreatmentMethod, cookingTime, cookingTemperature, goesWith, cookingAdvices, servingAdvices, consumptionAdvices, gasLevel, alcoholStrength, foodEnergyValue, ingridients, model, power, capacity, producerInfo, groupName, groupDescription, properties, producer, producersCountry, producerInformation, importantLimitations, groupName, groupDescription, properties, alergicInformation, diabeticInformation, pregnantInformation, parentsInformation, customerInformation, precautionaryMeasures, relatedSkus, similarSkus, rates, totalCount, averageRate, scores, rate1, rate2, rate3, rate4, rate5, code, title, brand, subTitle, description, regularPrice, discountPrice, offerDescription, promoType, validityStartDate, validityEndDate, image, thumbnail, medium, fullSize, mediumLossy, images, thumbnail, medium, fullSize, mediumLossy, stampsPrice, webUrl, orderLimit, orderSteps, skuWeight, isAvailableForOrder, isWeightProduct, stock, categories, group, code, name, category, code, name, subcategory, code, name";
         List<String> skus = Arrays.asList("354342, 354338, 498054".split(","));
-        Response response = ecomAPI.post_ActualSKUInfo(skus, "0002");
+        Response response = ProjectAPI.post_ActualSKUInfo(skus, "0002");
 
         JsonArray asJsonArray = JsonParser.parseString(response.getBody().asString()).getAsJsonArray();
         ArrayList<String> skuNames = new ArrayList<>();
@@ -202,7 +202,7 @@ public class EcomAPITests extends BaseRestClass {
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
     public void post_ActualSKUInfo_emptySku_unAuthorizedUser_Test() {
-        Response response = ecomAPI.post_ActualSKUInfo(Collections.emptyList(), "0002");
+        Response response = ProjectAPI.post_ActualSKUInfo(Collections.emptyList(), "0002");
         log.info(response.getBody().asString());
 
         Assert.assertEquals(400, response.statusCode());
@@ -276,7 +276,7 @@ public class EcomAPITests extends BaseRestClass {
         Cookies cookies = userAPI.loginAndGetCookies(user);
         createOrder(defaultStore, defaultSKU);
 
-        Response response = ecomAPI.post_ConfirmOrder(cookies, defaultTimeslot, user);
+        Response response = ProjectAPI.post_ConfirmOrder(cookies, defaultTimeslot, user);
 
         log.info("Response body confirm order " + response.getBody().asString());
 
@@ -288,7 +288,7 @@ public class EcomAPITests extends BaseRestClass {
                     .getAsJsonObject().get("timeSlots").getAsJsonArray().get(0)
                     .getAsJsonObject().get("timeSlotId").getAsString();
 
-            response = ecomAPI.post_ConfirmOrder(cookies, timeslot, user);
+            response = ProjectAPI.post_ConfirmOrder(cookies, timeslot, user);
             log.info("Response body confirm order " + response.getBody().asString());
             log.info("TimeSlot " + timeslot);
         }
@@ -302,8 +302,8 @@ public class EcomAPITests extends BaseRestClass {
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
     public void get_StocksInfoFromAllStores_Test() {
-        fieldsList = "stocks, stockBalance, id, name, address, cityKey, cityName, type, lat, long, opensAt, closesAt, isDefaultStore, isEcomAvailable, is24hStore, hasPetShop, minOrderSumm, maxOrderSumm, maxWeight, maxQuantityPerItem, orderLimitOverall, storeTimeZoneOffset";
-        Response response = ecomAPI.get_StockInfoFromAllStores("spb", "257495");
+        fieldsList = "stocks, stockBalance, id, name, address, cityKey, cityName, type, lat, long, opensAt, closesAt, isDefaultStore, isProjectAvailable, is24hStore, hasPetShop, minOrderSumm, maxOrderSumm, maxWeight, maxQuantityPerItem, orderLimitOverall, storeTimeZoneOffset";
+        Response response = ProjectAPI.get_StockInfoFromAllStores("spb", "257495");
         log.trace(response.getBody().asString());
         JsonArray stoks = JsonParser.parseString(response.getBody().asString()).getAsJsonObject().get("stocks").getAsJsonArray();
 
@@ -318,7 +318,7 @@ public class EcomAPITests extends BaseRestClass {
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
     public void get_StocksInfoFromAllStores_InvalidSKUId_Test() {
-        Response response = ecomAPI.get_StockInfoFromAllStores("spb", "999999");
+        Response response = ProjectAPI.get_StockInfoFromAllStores("spb", "999999");
         log.trace(response.getBody());
 
         Assert.assertEquals(404, response.statusCode());
@@ -329,8 +329,8 @@ public class EcomAPITests extends BaseRestClass {
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
     public void get_Cities_Test() {
-        fieldsList = "id, name, address, cityKey, cityName, type, lat, long, opensAt, closesAt, isDefaultStore, isEcomAvailable, is24hStore, hasPetShop, minOrderSumm, maxOrderSumm, maxWeight, maxQuantityPerItem, orderLimitOverall, storeTimeZoneOffset";
-        Response response = ecomAPI.get_StoresOfCity("spb");
+        fieldsList = "id, name, address, cityKey, cityName, type, lat, long, opensAt, closesAt, isDefaultStore, isProjectAvailable, is24hStore, hasPetShop, minOrderSumm, maxOrderSumm, maxWeight, maxQuantityPerItem, orderLimitOverall, storeTimeZoneOffset";
+        Response response = ProjectAPI.get_StoresOfCity("spb");
 
         log.trace(response.getBody());
         JsonArray stores = JsonParser.parseString(response.getBody().asString()).getAsJsonArray();
@@ -346,7 +346,7 @@ public class EcomAPITests extends BaseRestClass {
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
     public void get_Cities_InvalidCityCode_Test() {
-        Response response = ecomAPI.get_StoresOfCity("loblin");
+        Response response = ProjectAPI.get_StoresOfCity("loblin");
 
         log.trace(response.getBody().asString());
 
@@ -356,8 +356,8 @@ public class EcomAPITests extends BaseRestClass {
     private Response createOrder(String store, String sku) {
         Cookies strings = userAPI.loginAndGetCookies(user);
         addGoodsToCart(strings, sku);
-        log.info("Create Order " + host + "/api/v2/ecom/order/create?storeId=" + store);
-        Response response = ecomAPI.get_createOrder(strings, store);
+        log.info("Create Order " + host + "/api/v2/Project/order/create?storeId=" + store);
+        Response response = ProjectAPI.get_createOrder(strings, store);
         log.info("Response body create order " + response.getBody().asString());
         return response;
     }
@@ -365,13 +365,13 @@ public class EcomAPITests extends BaseRestClass {
     private Response createEmptyOrder() {
         Cookies cookies = userAPI.loginAndGetCookies(user);
 
-        return ecomAPI.get_createOrder(cookies, "0012");
+        return ProjectAPI.get_createOrder(cookies, "0012");
     }
 
 
     public void addGoodsToCart(Cookies cookies, String sku) {
-        log.info("add Goods To Cart " + host + "/api/v2/ecom/cart");
-        Response stringHttpResponse = ecomAPI.post_addGoodsToCart(cookies, sku);
+        log.info("add Goods To Cart " + host + "/api/v2/Project/cart");
+        Response stringHttpResponse = ProjectAPI.post_addGoodsToCart(cookies, sku);
 
         log.info("Response status add Goods To Cart " + stringHttpResponse.statusCode());
         log.info("Response add Goods To Cart " + stringHttpResponse.getBody().asString());

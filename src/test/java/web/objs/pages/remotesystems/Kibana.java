@@ -20,8 +20,8 @@ public class Kibana {
         $(byClassName("euiButton")).click();
     }
 
-    public static SelenideElement lentaapp() {
-        return $(byText("Lenta APP"));
+    public static SelenideElement ProjectLapp() {
+        return $(byText("ProjectL APP"));
     }
 
     public static SelenideElement discover() {

@@ -6,11 +6,11 @@ import web.tests.rest.*;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         SkuAPITests.class,
-        EcomAPITests.class,
+        ProjectAPITests.class,
         LentochkaAPITests.class,
         UserAPITests.class,
         WalletAPITests.class
 })
 
-public class EcomTests {
+public class Tests {
 }
