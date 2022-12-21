@@ -30,7 +30,7 @@ public abstract class BaseTestClass {
     protected User defaultUser = new UserBuilder()
             .withPhone(79+getProperty("site.username"))
             .withDefaultPassword()
-            .withLastName("Александрос")
+            .withLastName(f"{USER}")
             .execute();
 
     protected String host = getProperty("site.host");
