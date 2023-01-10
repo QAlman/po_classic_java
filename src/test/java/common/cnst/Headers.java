@@ -8,7 +8,7 @@ public interface Headers {
     Header SET_COOKIE = new Header("Set-Cookie","");
     Header COOKIE = new Header("cookie","");
     Header AUTHORIZATION_BEARER = new Header("Authorization","");
-    Header AUTHORIZATION_LENTOCHKA = new Header("Authorization", f"{CODE}");
+    Header AUTHORIZATION_tOCHKA = new Header("Authorization", f"{CODE}");
     Header BASIC_AUTH = new Header("Authorization", f"{CODE});
 
 }

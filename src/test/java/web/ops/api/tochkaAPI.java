@@ -15,14 +15,14 @@ import java.util.List;
 
 import static common.cnst.Headers.CONTENT_TYPE_JSON;
 
-public class LentochkaAPI extends BaseAPIClass {
+public class tochkaAPI extends BaseAPIClass {
 
 
     @Step(value = "Устновка цен точки PUT")
-    public Response put_lentochkaSetPrice(String storeID, String skuId, int regularPrice,
+    public Response put_tochkaSetPrice(String storeID, String skuId, int regularPrice,
                                           int discountPrice, boolean isPromo, boolean deleted) {
 
-        String url = host + "/api/v1/lentochka/prices";
+        String url = host + "/api/v1/tochka/prices";
         PriceValidityModel priceValidityModel = new PriceValidityModel(
                 regularPrice,
                 discountPrice,
@@ -50,7 +50,7 @@ public class LentochkaAPI extends BaseAPIClass {
                 .header("Message-Id", "1")
                 .header("Message-Number", "1")
                 .header("Total-Messages", "1")
-                .header(Headers.AUTHORIZATION_LENTOCHKA)
+                .header(Headers.AUTHORIZATION_tOCHKA)
                 .body(body.toString())
                 .when()
                 .put(url)
@@ -59,14 +59,14 @@ public class LentochkaAPI extends BaseAPIClass {
     }
 
     @Step(value = "Устновка цен точки PUT, несколько товаров")
-    public Response put_lentochkaSetPrice(String storeID,
+    public Response put_tochkaSetPrice(String storeID,
                                           String skuId, int regularPrice, int discountPrice,
                                           boolean isPromoSku, boolean deleted,
                                           String secondSkuId, int regularPriceSecondSku, int discountPriceSecondSku,
                                           boolean isPromoSecondSku, boolean deletedSecondSKU) {
 //==========================================================================================================
         //First SKU
-        String url = host + "/api/v1/lentochka/prices";
+        String url = host + "/api/v1/tochka/prices";
         PriceValidityModel priceValidityModel = new PriceValidityModel(
                 regularPrice,
                 discountPrice,
@@ -101,7 +101,7 @@ public class LentochkaAPI extends BaseAPIClass {
         return RestAssured
                 .given()
                 .header(Headers.CONTENT_TYPE_JSON)
-                .header(Headers.AUTHORIZATION_LENTOCHKA)
+                .header(Headers.AUTHORIZATION_tOCHKA)
                 .header("Message-Id", "1")
                 .header("Message-Number", "1")
                 .header("Total-Messages", "1")
@@ -112,10 +112,10 @@ public class LentochkaAPI extends BaseAPIClass {
     }
 
     @Step(value = "Устновка цен точки POST")
-    public Response post_lentochkaSetPrice(String storeID, String skuId, int regularPrice,
+    public Response post_tochkaSetPrice(String storeID, String skuId, int regularPrice,
                                           int discountPrice, boolean isPromo, boolean deleted) {
 
-        String url = host + "/api/v1/lentochka/prices";
+        String url = host + "/api/v1/tochka/prices";
         PriceValidityModel priceValidityModel = new PriceValidityModel(
                 regularPrice,
                 discountPrice,
@@ -143,7 +143,7 @@ public class LentochkaAPI extends BaseAPIClass {
                 .header("Message-Id", "1")
                 .header("Message-Number", "1")
                 .header("Total-Messages", "1")
-                .header(Headers.AUTHORIZATION_LENTOCHKA)
+                .header(Headers.AUTHORIZATION_tOCHKA)
                 .body(body.toString())
                 .when()
                 .put(url)
@@ -152,14 +152,14 @@ public class LentochkaAPI extends BaseAPIClass {
     }
 
     @Step(value = "Устновка цен точки POST, несколько товаров")
-    public Response post_lentochkaSetPrice(String storeID,
+    public Response post_tochkaSetPrice(String storeID,
                                           String skuId, int regularPrice, int discountPrice,
                                           boolean isPromoSku, boolean deleted,
                                           String secondSkuId, int regularPriceSecondSku, int discountPriceSecondSku,
                                           boolean isPromoSecondSku, boolean deletedSecondSKU) {
 //==========================================================================================================
         //First SKU
-        String url = host + "/api/v1/lentochka/prices";
+        String url = host + "/api/v1/tochka/prices";
         PriceValidityModel priceValidityModel = new PriceValidityModel(
                 regularPrice,
                 discountPrice,
@@ -194,7 +194,7 @@ public class LentochkaAPI extends BaseAPIClass {
         return RestAssured
                 .given()
                 .header(Headers.CONTENT_TYPE_JSON)
-                .header(Headers.AUTHORIZATION_LENTOCHKA)
+                .header(Headers.AUTHORIZATION_tOCHKA)
                 .header("Message-Id", "1")
                 .header("Message-Number", "1")
                 .header("Total-Messages", "1")

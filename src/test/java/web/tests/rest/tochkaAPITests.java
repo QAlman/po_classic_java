@@ -9,14 +9,14 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import web.ops.api.LentochkaAPI;
+import web.ops.api.tochkaAPI;
 import web.ops.api.UserAPI;
 
 
-public class LentochkaAPITests extends BaseRestClass {
+public class tochkaAPITests extends BaseRestClass {
     private final String storeId = "0071";
     private final String skuId = "231213";
-    private final String skuIdLentochka = "001606";
+    private final String skuIdtochka = "001606";
     private final boolean isPromo = true;
     private final boolean isNotPromo = false;
     private final boolean isDeleted = true;
@@ -29,7 +29,7 @@ public class LentochkaAPITests extends BaseRestClass {
     private int discountPriceBeforeChange;
     private Cookies cookies;
     private final UserAPI userAPI = new UserAPI();
-    private final LentochkaAPI lentochkaAPI = new LentochkaAPI();
+    private final tochkaAPI tochkaAPI = new tochkaAPI();
 
     @Before
     public void setUp(){
@@ -38,7 +38,7 @@ public class LentochkaAPITests extends BaseRestClass {
         this.regularPriceSecondSku = (int) (Math.random() * 20000);
         this.discountPriceSecondSku = (int) (Math.random() * 2000);
 
-        User userLentochka = userAPI.registerUserWithDeliveryInfo();
+        User usertochka = userAPI.registerUserWithDeliveryInfo();
 
         log.info("Random Regular price first SKU " + regularPrice);
         log.info("Random Discount price first SKU " + discountPrice);
@@ -46,8 +46,8 @@ public class LentochkaAPITests extends BaseRestClass {
         log.info("Random Discount price Second SKU " + discountPriceSecondSku);
 
 
-        this.cookies = userAPI.loginAndGetCookies(userLentochka);
-        Response skuBeforeChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        this.cookies = userAPI.loginAndGetCookies(usertochka);
+        Response skuBeforeChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject responseJSON = new JSONObject(skuBeforeChange.getBody().asString());
         this.regularPriceBeforeChange = (int) (Double.parseDouble(responseJSON.get("regularPrice").toString()));
         this.discountPriceBeforeChange = (int) (Double.parseDouble(responseJSON.get("discountPrice").toString()));
@@ -58,10 +58,10 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка цен точки PUT")
     @Owner(value = "Максим")
-    public void put_lentochkaSetPromoPrice_Test() {
-        lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
+    public void put_tochkaSetPromoPrice_Test() {
+        tochkaAPI.put_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
 
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject response = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(response.get("regularPrice").toString()));
@@ -82,11 +82,11 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка промо цен точки PUT")
     @Owner(value = "Максим")
-    public void put_lentochkaSetPrice_Test() {
+    public void put_tochkaSetPrice_Test() {
 
-        lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isPromo, isNotDeleted);
+        tochkaAPI.put_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isPromo, isNotDeleted);
 
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject response = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(response.get("regularPrice").toString()));
@@ -110,16 +110,16 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка  цен точки, затем удаление цен точки PUT")
     @Owner(value = "Максим")
-    public void put_lentochkaSetAndDeletePrice_Test() {
+    public void put_tochkaSetAndDeletePrice_Test() {
 //==========================================================================================================
         //Do first requests
-        lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isPromo, isNotDeleted);
+        tochkaAPI.put_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isPromo, isNotDeleted);
 //==========================================================================================================
         //Do second requests
-        lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isPromo, isDeleted);
+        tochkaAPI.put_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isPromo, isDeleted);
 //==========================================================================================================
         //Get values after requests
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject secondResponse = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(secondResponse.get("regularPrice").toString()));
@@ -141,9 +141,9 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка цен точки, затем отправка пакета цен точки, одна из цен удаляется(PUT)")
     @Owner(value = "Максим")
-    public void put_lentochkaSetAndDeleteKitPrice_Test() {
+    public void put_tochkaSetAndDeleteKitPrice_Test() {
 //==========================================================================================================
-        Response secondSkuBeforeChange = lentochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
+        Response secondSkuBeforeChange = tochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
         JSONObject responseJSON = new JSONObject(secondSkuBeforeChange.getBody().asString());
         int regularPriceSecondSkuBeforeChange = (int) (Double.parseDouble(responseJSON.get("regularPrice").toString()));
         int discountPriceSecondSkuBeforeChange = (int) (Double.parseDouble(responseJSON.get("discountPrice").toString()));
@@ -152,14 +152,14 @@ public class LentochkaAPITests extends BaseRestClass {
 
 //==========================================================================================================
         //Do first requests
-        lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
+        tochkaAPI.put_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
 //==========================================================================================================
         //Do second requests
-        lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isDeleted,
+        tochkaAPI.put_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isNotPromo, isDeleted,
                 skuId, regularPriceSecondSku, discountPriceSecondSku, isPromo, isNotDeleted);
 //==========================================================================================================
         //Get values after requests
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject resultResponse = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(resultResponse.get("regularPrice").toString()));
@@ -167,7 +167,7 @@ public class LentochkaAPITests extends BaseRestClass {
         log.info("Regular Price After Change: " + regularPriceAfterChange);
         log.info("Discount Price After Change: " + discountPriceAfterChange);
 
-        Response skuSecondAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
+        Response skuSecondAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
         JSONObject secondResultResponse = new JSONObject(skuSecondAfterChange.getBody().asString());
 
         int regularPriceSecondSkuAfterChange = (int) (Double.parseDouble(secondResultResponse.get("regularPrice").toString()));
@@ -200,10 +200,10 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка цен точки POST")
     @Owner(value = "Максим")
-    public void post_lentochkaSetPromoPrice_Test() {
-        lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
+    public void post_tochkaSetPromoPrice_Test() {
+        tochkaAPI.post_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
 
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject response = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(response.get("regularPrice").toString()));
@@ -224,11 +224,11 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка промо цен точки POST")
     @Owner(value = "Максим")
-    public void post_lentochkaSetPrice_Test() {
+    public void post_tochkaSetPrice_Test() {
 
-        lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isPromo, isNotDeleted);
+        tochkaAPI.post_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isPromo, isNotDeleted);
 
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject response = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(response.get("regularPrice").toString()));
@@ -252,16 +252,16 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка  цен точки, затем удаление цен точки POST")
     @Owner(value = "Максим")
-    public void post_lentochkaSetAndDeletePrice_Test() {
+    public void post_tochkaSetAndDeletePrice_Test() {
 //==========================================================================================================
         //Do first requests
-        lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isPromo, isNotDeleted);
+        tochkaAPI.post_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isPromo, isNotDeleted);
 //==========================================================================================================
         //Do second requests
-        lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isPromo, isDeleted);
+        tochkaAPI.post_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isPromo, isDeleted);
 //==========================================================================================================
         //Get values after requests
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject secondResponse = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(secondResponse.get("regularPrice").toString()));
@@ -283,10 +283,10 @@ public class LentochkaAPITests extends BaseRestClass {
     @Test
     @DisplayName("Установка цен точки, затем отправка пакета цен точки, одна из цен удаляется POST")
     @Owner(value = "Максим")
-    public void post_lentochkaSetAndDeleteKitPrice_Test() {
+    public void post_tochkaSetAndDeleteKitPrice_Test() {
 //==========================================================================================================
         //Get info by second SKU
-        Response secondSkuBeforeChange = lentochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
+        Response secondSkuBeforeChange = tochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
         JSONObject responseJSON = new JSONObject(secondSkuBeforeChange.getBody().asString());
         int regularPriceSecondSkuBeforeChange = (int) (Double.parseDouble(responseJSON.get("regularPrice").toString()));
         int discountPriceSecondSkuBeforeChange = (int) (Double.parseDouble(responseJSON.get("discountPrice").toString()));
@@ -295,14 +295,14 @@ public class LentochkaAPITests extends BaseRestClass {
 
 //==========================================================================================================
         //Do first requests
-        lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
+        tochkaAPI.post_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
 //==========================================================================================================
         //Do second requests
-        lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isDeleted,
+        tochkaAPI.post_tochkaSetPrice(storeId, skuIdtochka, regularPrice, discountPrice, isNotPromo, isDeleted,
                 skuId, regularPriceSecondSku, discountPriceSecondSku, isPromo, isNotDeleted);
 //==========================================================================================================
         //Get values after requests
-        Response skuAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuIdLentochka, cookies);
+        Response skuAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuIdtochka, cookies);
         JSONObject resultResponse = new JSONObject(skuAfterChange.getBody().asString());
 
         int regularPriceAfterChange = (int) (Double.parseDouble(resultResponse.get("regularPrice").toString()));
@@ -310,7 +310,7 @@ public class LentochkaAPITests extends BaseRestClass {
         log.info("Regular Price After Change: " + regularPriceAfterChange);
         log.info("Discount Price After Change: " + discountPriceAfterChange);
 
-        Response skuSecondAfterChange = lentochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
+        Response skuSecondAfterChange = tochkaAPI.getSKUWithLogin(storeId, skuId, cookies);
         JSONObject secondResultResponse = new JSONObject(skuSecondAfterChange.getBody().asString());
 
         int regularPriceSecondSkuAfterChange = (int) (Double.parseDouble(secondResultResponse.get("regularPrice").toString()));

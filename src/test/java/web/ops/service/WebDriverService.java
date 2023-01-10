@@ -54,7 +54,7 @@ public class WebDriverService {
     public WebDriver setChromeDriver() {
 
         System.setProperty("webdriver.chrome.driver", Objects.requireNonNull(getProperty("site.chromedriver.path")));
-        System.setProperty("webdriver.chrome.silentOutput", "true");
+        System.setProperty("webdriver.chrome.sitOutput", "true");
 
         ChromeOptions options = new ChromeOptions();
 

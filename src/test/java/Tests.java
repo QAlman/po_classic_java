@@ -7,7 +7,7 @@ import web.tests.rest.*;
 @Suite.SuiteClasses({
         SkuAPITests.class,
         ProjectAPITests.class,
-        LentochkaAPITests.class,
+        tochkaAPITests.class,
         UserAPITests.class,
         WalletAPITests.class
 })
