@@ -34,7 +34,7 @@ public class LoyaltyPage {
     public SelenideElement slideTwo() { return $(byText("Ежемесячно совершайте покупки и выполняйте задания уровня")); }
     public SelenideElement slideThree() { return $(byText("Получайте 5% баллами за каждую категорию")); }
     public WebList categoriesList() { return new WebList(byClassName("categories-loyalty-list")); }
-    public SelenideElement proPopUp() { return $(byText("Вы зарегистрированы в программе «ЛЕНТА ПРО»")); }
+    public SelenideElement proPopUp() { return $(byText("Вы зарегистрированы в программе «Project ПРО»")); }
     public SelenideElement conditionsOfProgram() { return $(byText("Условия программы")); }
     public SelenideElement clearButton() { return $(byText("Понятно")); }
     public SelenideElement articleTitle() {return $(byClassName("article__title")); }

@@ -44,7 +44,7 @@ public class ProjectAPITests extends BaseRestClass {
     }
 
     @Test
-    @DisplayName("Проверить статус Екомм в ТК (Из магазина)")
+    @DisplayName("Проверить статус  в ТК (Из магазина)")
     @Owner(value = "Антон")
     @Tag(value = Tags.API)
     public void get_ProjectmStatusInTC_fromStores_Test() {

@@ -87,7 +87,7 @@ public class GoodPage extends BasePage {
     }
 
     public SelenideElement productIsOutOfStock() {
-        return $(byText("Товар доступен в других магазинах \"Лента\""));
+        return $(byText("Товар доступен в других магазинах \"Project\""));
     }
 
     public SelenideElement feedBackComment() {

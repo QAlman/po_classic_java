@@ -74,7 +74,7 @@ public class LoginPage extends BasePage {
     public SelenideElement alertForm() {return $(byText("Неправильный код проверки. Повторите попытку ещё раз."));}
     public SelenideElement selectCategoriesButton() { return $(byText("Выбрать категории")); }
     public SelenideElement selectShopButton() { return $(byClassName("store-preview__button--submit")); }
-    public SelenideElement iHaventProjectLsCard() { return $(byXpath("//*[text()[contains(., 'нет старой карты «ЛЕНТА»')]]")); }
+    public SelenideElement iHaventProjectLsCard() { return $(byXpath("//*[text()[contains(., 'нет старой карты «Project»')]]")); }
     public SelenideElement categoriesPage() { return $(byXpath(".//div[contains(@class, 'category-loyalty__number')]")); }
 
 }
