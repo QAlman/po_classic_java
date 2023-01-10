@@ -18,7 +18,7 @@ import static common.cnst.Headers.CONTENT_TYPE_JSON;
 public class LentochkaAPI extends BaseAPIClass {
 
 
-    @Step(value = "Устновка цен ленточки PUT")
+    @Step(value = "Устновка цен точки PUT")
     public Response put_lentochkaSetPrice(String storeID, String skuId, int regularPrice,
                                           int discountPrice, boolean isPromo, boolean deleted) {
 
@@ -58,7 +58,7 @@ public class LentochkaAPI extends BaseAPIClass {
 
     }
 
-    @Step(value = "Устновка цен ленточки PUT, несколько товаров")
+    @Step(value = "Устновка цен точки PUT, несколько товаров")
     public Response put_lentochkaSetPrice(String storeID,
                                           String skuId, int regularPrice, int discountPrice,
                                           boolean isPromoSku, boolean deleted,
@@ -111,7 +111,7 @@ public class LentochkaAPI extends BaseAPIClass {
                 .andReturn();
     }
 
-    @Step(value = "Устновка цен ленточки POST")
+    @Step(value = "Устновка цен точки POST")
     public Response post_lentochkaSetPrice(String storeID, String skuId, int regularPrice,
                                           int discountPrice, boolean isPromo, boolean deleted) {
 
@@ -151,7 +151,7 @@ public class LentochkaAPI extends BaseAPIClass {
 
     }
 
-    @Step(value = "Устновка цен ленточки POST, несколько товаров")
+    @Step(value = "Устновка цен точки POST, несколько товаров")
     public Response post_lentochkaSetPrice(String storeID,
                                           String skuId, int regularPrice, int discountPrice,
                                           boolean isPromoSku, boolean deleted,

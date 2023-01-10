@@ -56,7 +56,7 @@ public class LentochkaAPITests extends BaseRestClass {
     }
 
     @Test
-    @DisplayName("Установка цен ленточки PUT")
+    @DisplayName("Установка цен точки PUT")
     @Owner(value = "Максим")
     public void put_lentochkaSetPromoPrice_Test() {
         lentochkaAPI.put_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
@@ -80,7 +80,7 @@ public class LentochkaAPITests extends BaseRestClass {
 
 
     @Test
-    @DisplayName("Установка промо цен ленточки PUT")
+    @DisplayName("Установка промо цен точки PUT")
     @Owner(value = "Максим")
     public void put_lentochkaSetPrice_Test() {
 
@@ -108,7 +108,7 @@ public class LentochkaAPITests extends BaseRestClass {
 
 
     @Test
-    @DisplayName("Установка  цен ленточки, затем удаление цен ленточки PUT")
+    @DisplayName("Установка  цен точки, затем удаление цен точки PUT")
     @Owner(value = "Максим")
     public void put_lentochkaSetAndDeletePrice_Test() {
 //==========================================================================================================
@@ -139,7 +139,7 @@ public class LentochkaAPITests extends BaseRestClass {
     }
 
     @Test
-    @DisplayName("Установка цен ленточки, затем отправка пакета цен ленточки, одна из цен удаляется(PUT)")
+    @DisplayName("Установка цен точки, затем отправка пакета цен точки, одна из цен удаляется(PUT)")
     @Owner(value = "Максим")
     public void put_lentochkaSetAndDeleteKitPrice_Test() {
 //==========================================================================================================
@@ -198,7 +198,7 @@ public class LentochkaAPITests extends BaseRestClass {
     }
 
     @Test
-    @DisplayName("Установка цен ленточки POST")
+    @DisplayName("Установка цен точки POST")
     @Owner(value = "Максим")
     public void post_lentochkaSetPromoPrice_Test() {
         lentochkaAPI.post_lentochkaSetPrice(storeId, skuIdLentochka, regularPrice, discountPrice, isNotPromo, isNotDeleted);
@@ -222,7 +222,7 @@ public class LentochkaAPITests extends BaseRestClass {
 
 
     @Test
-    @DisplayName("Установка промо цен ленточки POST")
+    @DisplayName("Установка промо цен точки POST")
     @Owner(value = "Максим")
     public void post_lentochkaSetPrice_Test() {
 
@@ -250,7 +250,7 @@ public class LentochkaAPITests extends BaseRestClass {
 
 
     @Test
-    @DisplayName("Установка  цен ленточки, затем удаление цен ленточки POST")
+    @DisplayName("Установка  цен точки, затем удаление цен точки POST")
     @Owner(value = "Максим")
     public void post_lentochkaSetAndDeletePrice_Test() {
 //==========================================================================================================
@@ -281,7 +281,7 @@ public class LentochkaAPITests extends BaseRestClass {
     }
 
     @Test
-    @DisplayName("Установка цен ленточки, затем отправка пакета цен ленточки, одна из цен удаляется POST")
+    @DisplayName("Установка цен точки, затем отправка пакета цен точки, одна из цен удаляется POST")
     @Owner(value = "Максим")
     public void post_lentochkaSetAndDeleteKitPrice_Test() {
 //==========================================================================================================
