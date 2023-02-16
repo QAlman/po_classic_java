@@ -10,8 +10,3 @@ loyaltyPage.emailInputField().sendKeys(defaultUser.getEmail());
 /**Ожидаем пока пройдет 120 секунд от предыдущей отправки емейла, во время регистрации**/
 //        sleep(120000);
 loyaltyPage.sendAgainButton().click();
-
-
-## Проблемы
-1. Битые данные на тестовых серверах
-
